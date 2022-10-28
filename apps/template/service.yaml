@@ -1,0 +1,22 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: template
+  namespace: default
+spec:
+  template:
+    metadata:
+      labels:
+        admission.datadoghq.com/enabled: "true"
+        tags.datadoghq.com/env: local
+        tags.datadoghq.com/service: template
+        tags.datadoghq.com/version: dev
+      annotations:
+        admission.datadoghq.com/java-lib.version: "latest"
+    spec:
+      containers:
+        - image: docker.io/devinsba/pucksmart-template:latest
+          imagePullPolicy: Always
+          env:
+            - name: DD_PROFILING_ENABLED
+              value: "true"

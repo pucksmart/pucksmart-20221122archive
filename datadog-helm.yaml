@@ -1,0 +1,15 @@
+targetSystem: "linux"
+datadog:
+  clusterName: pucksmart-local
+  tags:
+    - "env:local"
+  # datadog.kubelet.tlsVerify should be `false` on kind and minikube
+  # to establish communication with the kubelet
+  kubelet:
+    tlsVerify: "false"
+  logs:
+    enabled: true
+clusterAgent:
+  enabled: true
+  admissionController:
+    configMode: socket
